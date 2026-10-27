@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksperimen 5 — Script tanpa defer di head</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Eksperimen 5: script di <head> TANPA defer.
+         Script ini dijalankan browser tepat di posisi ini,
+         yaitu SEBELUM <body> diparsing, sehingga elemen
+         #judulEksperimen5 belum ada dan getElementById()
+         mengembalikan null. -->
+    <script>
+        console.log("Eksperimen 5 — script berjalan, document.readyState =", document.readyState);
+
+        var judul = document.getElementById("judulEksperimen5");
+        console.log("Eksperimen 5 — hasil getElementById:", judul);
+
+        // Baris berikut melempar TypeError karena judul bernilai null.
+        // Pesan errornya terlihat pada Console browser (Inspect → Console).
+        judul.textContent = "Teks ini seharusnya berhasil diubah";
+    </script>
+</head>
+<body>
+    <main class="container">
+        <h1 id="judulEksperimen5">Judul Eksperimen 5</h1>
+        <p class="subjudul">Percobaan: script tanpa <code>defer</code> di bagian <code>&lt;head&gt;</code></p>
+
+        <section>
+            <h2>Hasil Pengamatan</h2>
+            <p id="pesanEksperimen5">Judul di atas <strong>TIDAK berubah</strong>, padahal script memberi
+                perintah <code>judul.textContent = "Teks ini seharusnya berhasil diubah"</code>.</p>
+            <p class="catatan">Buka <strong>Inspect → Console</strong>: muncul
+                <code>Uncaught TypeError: Cannot set properties of null (setting 'textContent')</code>
+                karena <code>document.getElementById("judulEksperimen5")</code> mengembalikan
+                <code>null</code> — elemen tersebut belum diparsing saat script di <code>&lt;head&gt;</code>
+                berjalan (<code>document.readyState = "loading"</code>).</p>
+            <p><strong>Solusi:</strong> beri atribut <code>defer</code> pada <code>&lt;script&gt;</code>
+                (dijalankan setelah HTML selesai diparsing) atau pindahkan script ke bagian akhir
+                <code>&lt;body&gt;</code>. Halaman utama
+                <a href="index.html">index.html</a> memakai <code>defer</code>, sehingga semua latihan
+                berjalan tanpa error.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 — Praktikum Pemrograman Web</p>
+        </footer>
+    </main>
+</body>
+</html>

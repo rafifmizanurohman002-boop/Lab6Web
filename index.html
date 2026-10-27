@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 6 — JavaScript DOM dan Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Atribut defer: JavaScript dijalankan setelah HTML selesai diparsing,
+         sehingga elemen yang dipilih sudah tersedia. -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="container">
+        <h1 id="judul">Latihan DOM</h1>
+        <p class="subjudul">Praktikum 6 — JavaScript DOM dan Event Handling | Pemrograman Web (Pertemuan 7)</p>
+        <p id="pesan">Belum ada tindakan.</p>
+
+        <!-- Latihan 1 -->
+        <section id="latihan1">
+            <h2>Latihan 1 — Mengubah Teks dengan DOM</h2>
+            <p>Judul dan paragraf di atas dipilih dengan <code>document.getElementById("judul")</code> dan
+                <code>document.getElementById("pesan")</code>, lalu kontennya diganti oleh JavaScript.
+                Muat ulang halaman untuk mengulang latihan ini.</p>
+        </section>
+
+        <!-- Latihan 2 -->
+        <section id="latihan2">
+            <h2>Latihan 2 — Event click</h2>
+            <p>Klik tombol di bawah. Teks paragraf <code>#pesan</code> akan diperbarui beserta waktu
+                saat tindakan dilakukan.</p>
+            <button id="tombolAksi" type="button">Klik Saya</button>
+        </section>
+
+        <!-- Latihan 3 -->
+        <section id="latihan3">
+            <h2>Latihan 3 — Mengubah Kelas dan Gaya CSS</h2>
+            <p id="teksGaya">Paragraf ini berubah gayanya ketika tombol diklik, memakai
+                <code>classList.toggle()</code> untuk kelas <code>.highlight</code> dan <code>.teks-besar</code>.</p>
+            <button id="tombolGaya" type="button">Ubah Gaya</button>
+        </section>
+
+        <!-- Latihan 4 -->
+        <section id="latihan4">
+            <h2>Latihan 4 — Event input dan Penghitung Karakter</h2>
+            <div class="field">
+                <label for="namaInput">Nama:</label>
+                <input type="text" id="namaInput" maxlength="40" placeholder="Ketik nama Anda">
+            </div>
+            <p>Jumlah karakter: <span id="jumlahKarakter">0</span></p>
+        </section>
+
+        <!-- Latihan 5 -->
+        <section id="latihan5">
+            <h2>Latihan 5 — Validasi Form Pendaftaran</h2>
+            <form id="formPendaftaran" novalidate>
+                <div class="field">
+                    <label for="nama">Nama lengkap</label>
+                    <input id="nama" name="nama" type="text" placeholder="Nama lengkap">
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="nama@contoh.com">
+                </div>
+                <div class="field">
+                    <label for="usia">Usia</label>
+                    <input id="usia" name="usia" type="number" min="17" max="100" placeholder="17–100">
+                </div>
+                <button type="submit">Daftar</button>
+            </form>
+            <p id="pesanForm" aria-live="polite"></p>
+        </section>
+
+        <!-- Latihan 6 -->
+        <section id="latihan6">
+            <h2>Latihan 6 — Daftar Tugas (To-do List)</h2>
+            <div class="field">
+                <label for="inputTugas">Tugas baru</label>
+                <input id="inputTugas" type="text" placeholder="misal: Mengerjakan latihan CSS">
+            </div>
+            <button id="tambahTugas" type="button">Tambah</button>
+            <p id="pesanTugas" aria-live="polite"></p>
+            <ul id="daftarTugas"></ul>
+        </section>
+
+        <!-- Mini Project -->
+        <section id="miniproject">
+            <h2>Mini Project — Form Pendaftaran Workshop</h2>
+            <form id="formWorkshop" novalidate>
+                <div class="field">
+                    <label for="wsNama">Nama lengkap</label>
+                    <input id="wsNama" name="wsNama" type="text" maxlength="60" placeholder="Nama minimal 3 karakter">
+                    <small>Karakter nama: <span id="hitungNama">0</span></small>
+                </div>
+                <div class="field">
+                    <label for="wsEmail">Email</label>
+                    <input id="wsEmail" name="wsEmail" type="email" placeholder="nama@contoh.com">
+                </div>
+                <div class="field">
+                    <label for="wsSesi">Sesi workshop</label>
+                    <select id="wsSesi" name="wsSesi">
+                        <option value="">— Pilih sesi —</option>
+                        <option value="Sesi 1 — Pagi (09.00–11.00)">Sesi 1 — Pagi (09.00–11.00)</option>
+                        <option value="Sesi 2 — Siang (13.00–15.00)">Sesi 2 — Siang (13.00–15.00)</option>
+                        <option value="Sesi 3 — Sore (16.00–18.00)">Sesi 3 — Sore (16.00–18.00)</option>
+                    </select>
+                </div>
+                <div class="ringkasan">
+                    <strong>Ringkasan input (langsung):</strong>
+                    <span id="isiRingkasan">belum ada data</span>
+                </div>
+                <p id="sesiTerpilih">Sesi terpilih: belum dipilih</p>
+                <button type="submit">Daftar</button>
+                <button type="button" id="resetWorkshop">Reset</button>
+            </form>
+            <p id="pesanWorkshop" aria-live="polite"></p>
+        </section>
+
+        <!-- Eksperimen Mandiri -->
+        <section id="eksperimen">
+            <h2>Eksperimen Mandiri</h2>
+
+            <h3>Eksperimen 1 — Tombol hapus satu item To-do List</h3>
+            <p>Setiap tugas pada <strong>Latihan 6</strong> kini memiliki tombol <em>Hapus</em> merah di samping
+                tombol <em>Tandai selesai</em>. Klik untuk menghapus satu item dari daftar.</p>
+
+            <h3>Eksperimen 2 — Validasi nama minimal 3 karakter</h3>
+            <p>Berlaku pada form <strong>Mini Project</strong>: selain wajib diisi, nama harus terdiri dari
+                minimal 3 karakter sebelum dinyatakan valid.</p>
+
+            <h3>Eksperimen 3 — Event <code>change</code> pada dropdown sesi workshop</h3>
+            <p>Pada <strong>Mini Project</strong>, pilih salah satu sesi. Teks <code>#sesiTerpilih</code>
+                dan ringkasan akan menampilkan sesi yang dipilih melalui event <code>change</code>.</p>
+
+            <h3>Eksperimen 4 — Sembunyikan/tampilkan paragraf dengan class CSS</h3>
+            <button id="toggleParagraf" type="button">Sembunyikan / Tampilkan Paragraf</button>
+            <p id="paragrafToggle" class="kotak-toggle">Paragraf ini bisa disembunyikan dan ditampilkan kembali
+                hanya dengan mengganti class CSS (<code>classList.toggle("tersembunyi")</code>).</p>
+
+            <h3>Eksperimen 5 — Script tanpa <code>defer</code> di <code>&lt;head&gt;</code></h3>
+            <p>Diuji pada halaman terpisah: <a href="eksperimen5.html">eksperimen5.html</a>. Script di
+                <code>&lt;head&gt;</code> tanpa <code>defer</code> dijalankan sebelum <code>&lt;body&gt;</code>
+                diparsing sehingga <code>getElementById()</code> mengembalikan <code>null</code> dan muncul
+                TypeError di Console. Penjelasan lengkap ada di README.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 — Praktikum Pemrograman Web</p>
+        </footer>
+    </main>
+</body>
+</html>
